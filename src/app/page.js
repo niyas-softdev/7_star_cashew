@@ -7,63 +7,52 @@ import { ArrowRight, Globe, ShieldCheck, Truck, Award, Star } from "lucide-react
 import Section from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
 import ProductCard from "@/components/products/ProductCard";
+import ProductModal from "@/components/products/ProductModal";
+import Testimonials from "@/components/Testimonials";
+import { products } from "@/data/products";
 
 export default function Home() {
-  const products = [
-    {
-      id: 1,
-      name: "Premium Cashew W180",
-      category: "Cashew Nuts",
-      image: null, // Placeholder will apply
-    },
-    {
-      id: 2,
-      name: "Salted Pistachios",
-      category: "Cashew & Nuts",
-      image: null,
-    },
-    {
-      id: 3,
-      name: "California Almonds",
-      category: "Cashew & Nuts",
-      image: null,
-    },
-    {
-      id: 4,
-      name: "Dried Figs (Anjeer)",
-      category: "Dry Fruits",
-      image: null,
-    },
-  ];
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
+
+  // Logic to prioritize Best Sellers but ensure we show enough products
+  const bestSellers = products.filter((p) => p.tags?.includes("Best Seller"));
+  const otherProducts = products.filter((p) => !p.tags?.includes("Best Seller"));
+
+  // Combine and slice to get exactly 4 products (2 existing + 2 more requested)
+  const displayProducts = [...bestSellers, ...otherProducts].slice(0, 4);
 
   const highlights = [
     {
       icon: ShieldCheck,
       title: "Premium Quality",
-      description: "Hand-picked, graded, and processed to meet international export standards.",
+      description:
+        "Hand-picked, graded, and processed to meet international export standards.",
     },
     {
       icon: Globe,
       title: "Global Export",
-      description: "Trusted supplier delivering to B2B clients and wholesalers worldwide.",
+      description:
+        "Trusted supplier delivering to B2B clients and wholesalers worldwide.",
     },
     {
       icon: Truck,
       title: "Timely Delivery",
-      description: "Efficient logistics network ensuring fresh products reach you on time.",
+      description:
+        "Efficient logistics network ensuring fresh products reach you on time.",
     },
     {
       icon: Award,
       title: "Certified Hygiene",
-      description: "Processed in state-of-the-art facilities maintaining highest hygiene levels.",
+      description:
+        "Processed in state-of-the-art facilities maintaining highest hygiene levels.",
     },
   ];
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+      <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden">
+        {/* Background Image with Bright Overlay Strategy */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero-bg.png"
@@ -72,41 +61,44 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 via-brand-primary/70 to-transparent" />
+          {/* Gradient Overlay: Darker on left for text readability, transparent on right for brightness */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/10 via-brand-primary/10 to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center md:text-left">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="md:max-w-2xl"
+            className="max-w-3xl"
           >
-            <div className="flex items-center gap-2 mb-4 justify-center md:justify-start">
-              <Star className="text-brand-gold fill-brand-gold" size={20} />
-              <span className="text-brand-gold font-bold tracking-widest uppercase text-sm">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-brand-gold/30">
+              <Star className="text-brand-gold fill-brand-gold" size={16} />
+              <span className="text-brand-gold font-bold tracking-widest uppercase text-xs">
                 Export Quality Guarantee
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-tight mb-6">
+            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white leading-tight mb-6 drop-shadow-lg">
               Premium Quality <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-yellow-200 to-brand-gold">
                 Cashews & Dry Fruits
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-brand-light/90 mb-8 leading-relaxed font-light">
-              Your trusted global partner for high-grade cashews, dry fruits, and seeds.
-              Sourced from the finest farms in Tamil Nadu and exported worldwide.
+            <p className="text-lg md:text-xl text-brand-light/95 mb-10 leading-relaxed font-light max-w-2xl drop-shadow-md">
+              Your trusted global partner for high-grade cashews, dry fruits, and
+              seeds. Sourced from the finest farms and exported worldwide with
+              guaranteed freshness.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button href="/products" variant="primary">
-                View Products
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button href="/products" variant="primary" className="shadow-lg shadow-brand-gold/20">
+                Explore Products
               </Button>
-              <Button href="/contact" variant="outline">
+              <Button href="/contact" variant="outline" className="backdrop-blur-sm bg-white/5 border-white/30 hover:bg-white/10">
                 Contact for Bulk Orders
               </Button>
             </div>
@@ -156,9 +148,13 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {displayProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onQuickView={(p) => setSelectedProduct(p)}
+            />
           ))}
         </div>
 
@@ -179,8 +175,10 @@ export default function Home() {
               Why 7 Star Cashews?
             </h2>
             <p className="text-brand-light/80 mb-8 leading-relaxed text-lg">
-              We take pride in our heritage of delivering the finest quality cashews and dry fruits.
-              Our commitment to excellence ensures that every shipment meets the rigorous standards required for international trade.
+              We take pride in our heritage of delivering the finest quality
+              cashews and dry fruits. Our commitment to excellence ensures that
+              every shipment meets the rigorous standards required for
+              international trade.
             </p>
 
             <ul className="space-y-4 mb-8">
@@ -189,10 +187,15 @@ export default function Home() {
                 "Advanced processing technology",
                 "Strict quality control checks",
                 "Flexible bulk packaging options",
-                "Competitive export pricing"
+                "Competitive export pricing",
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-brand-light/90">
-                  <span className="w-6 h-6 rounded-full bg-brand-gold flex items-center justify-center text-brand-primary text-xs font-bold">✓</span>
+                <li
+                  key={i}
+                  className="flex items-center gap-3 text-brand-light/90"
+                >
+                  <span className="w-6 h-6 rounded-full bg-brand-gold flex items-center justify-center text-brand-primary text-xs font-bold">
+                    ✓
+                  </span>
                   {item}
                 </li>
               ))}
@@ -207,13 +210,27 @@ export default function Home() {
               <div className="absolute inset-0 opacity-20 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')] bg-cover bg-center" />
               <div className="relative z-10 text-center">
                 <Globe className="text-brand-gold w-24 h-24 mx-auto mb-4 animate-pulse" />
-                <h3 className="text-2xl font-bold text-white">Global Presence</h3>
-                <p className="text-brand-light/70">Exporting to 20+ Countries</p>
+                <h3 className="text-2xl font-bold text-white">
+                  Global Presence
+                </h3>
+                <p className="text-brand-light/70">
+                  Exporting to 20+ Countries
+                </p>
               </div>
             </div>
           </div>
         </div>
       </Section>
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* Product Modal */}
+      <ProductModal
+        product={selectedProduct}
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </div>
   );
 }
