@@ -23,7 +23,7 @@ const EVENTS = [
         image: "/images/events/mewa_2025.png"
     },
     {
-        id: "dubai-meeting",
+        id: "dubai-meet",
         title: "Strategic Discussion – Dubai",
         type: "meeting",
         date: "2025",
