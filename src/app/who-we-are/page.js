@@ -206,39 +206,49 @@ export default function WhoWeArePage() {
 
             {/* COMPANIES */}
             <Section className="bg-[#07140E]">
-                <div className="text-center mb-14">
-                    <SectionHeading>Expanded Companies</SectionHeading>
-                </div>
+    <div className="text-center mb-14">
+        <SectionHeading>Our Tie-Up Corporate</SectionHeading>
+        <p className="text-white/70 mt-4">
+            We proudly collaborate with trusted corporate partners and global trade networks.
+        </p>
+    </div>
 
-                <div className="grid md:grid-cols-2 gap-8">
-                    {[
-                        {
-                            name: "Kerala Woodland",
-                            tag: "Import & Export",
-                            icon: Truck,
-                            desc: "Strong logistics-backed international sourcing & exports."
-                        },
-                        {
-                            name: "Aban Impex",
-                            tag: "Export House",
-                            icon: Building2,
-                            desc: "Quality-focused export house serving global markets."
-                        }
-                    ].map((c, i) => (
-                        <div
-                            key={i}
-                            className="p-8 rounded-2xl bg-white/5 border border-white/10 text-center"
-                        >
-                            <c.icon size={40} className="mx-auto text-brand-gold mb-4" />
-                            <h3 className="text-2xl font-bold">{c.name}</h3>
-                            <span className="text-brand-gold uppercase text-sm tracking-wider">
-                                {c.tag}
-                            </span>
-                            <p className="text-white/70 mt-4">{c.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </Section>
+    <div className="grid md:grid-cols-3 gap-8">
+        {[
+            {
+                name: "Woodland Import & Export",
+                tag: "Trade Partner",
+                icon: Truck,
+                desc: "Official tie-up partner for import and export logistics support."
+            },
+            {
+                name: "Aban Impex",
+                tag: "Export Partner",
+                icon: Building2,
+                desc: "Strategic export partner serving international markets."
+            },
+            {
+                name: "Corporate Network",
+                tag: "Global Tie-Ups",
+                icon: Handshake,
+                desc: "Multiple corporate collaborations across countries and industries."
+            }
+        ].map((c, i) => (
+            <div
+                key={i}
+                className="p-8 rounded-2xl bg-white/5 border border-white/10 text-center"
+            >
+                <c.icon size={40} className="mx-auto text-brand-gold mb-4" />
+                <h3 className="text-2xl font-bold">{c.name}</h3>
+                <span className="text-brand-gold uppercase text-sm tracking-wider">
+                    {c.tag}
+                </span>
+                <p className="text-white/70 mt-4">{c.desc}</p>
+            </div>
+        ))}
+    </div>
+</Section>
+
 
             {/* GLOBAL PRESENCE */}
             <Section className="relative bg-[#020806]">

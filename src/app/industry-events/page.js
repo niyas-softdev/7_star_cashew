@@ -2,8 +2,10 @@
 import React from "react";
 import Image from "next/image";
 import Section from "@/components/ui/Section";
-import { Award, CheckCircle, Globe, Users, Calendar, MapPin, Briefcase, TrendingUp } from "lucide-react";
+import { Truck, CheckCircle, Globe, Users, Calendar, MapPin, Briefcase, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+
+
 
 const EVENTS = [
     {
@@ -298,6 +300,67 @@ export default function IndustryEventsPage() {
 
                 </div>
             </Section>
+            {/* Pan India Logistics Partner */}
+            <Section dark>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+                    {/* IMAGE SIDE */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="relative h-[380px] md:h-[460px] rounded-2xl overflow-hidden border border-brand-gold/20"
+                    >
+                        <Image
+                            src="/images/events/pan_india_partner.jpg"
+                            alt="Pan India Logistics Partner Meeting"
+                            fill
+                            className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    </motion.div>
+
+                    {/* CONTENT SIDE */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <span className="text-brand-gold uppercase tracking-widest text-sm">
+                            Logistics Network
+                        </span>
+
+                        <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mt-3 mb-6">
+                            Pan India Logistics Partner
+                        </h3>
+
+                        <p className="text-brand-light/80 text-lg leading-relaxed mb-8">
+                            We work closely with trusted Pan-India logistics partners to ensure
+                            safe, fast, and reliable movement of goods across all major cities
+                            and trade hubs. Our distribution strength supports bulk supply,
+                            export handling, and time-bound delivery commitments.
+                        </p>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+                                <Globe className="text-brand-gold mb-2" size={22} />
+                                <p className="text-white font-semibold text-sm">
+                                    Nationwide Coverage
+                                </p>
+                            </div>
+
+                            <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+                                <Truck className="text-brand-gold mb-2" size={22} />
+                                <p className="text-white font-semibold text-sm">
+                                    Bulk Transport Support
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                </div>
+            </Section>
+
 
             {/* Mission & Vision - Moved to end */}
             <Section className="bg-brand-primary">

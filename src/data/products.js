@@ -154,7 +154,7 @@ export const products = [
         category: "Dry Fruits",
         shortDesc: "Dried figs rich in fiber and minerals.",
         description: "Large, golden dried figs with a chewy texture and sweet seeds. Excellent for digestion and quick energy.",
-        image: "/images/fig.jpg",
+        image: "/images/fig1.jpg",
         tags: ["Fiber Rich", "Digestive"],
         healthBenefits: ["High Fiber", "Bone Health", "Mineral Rich"],
         nutritionalInfo: {
